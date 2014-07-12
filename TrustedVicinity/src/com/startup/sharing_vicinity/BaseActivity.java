@@ -7,6 +7,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -35,7 +37,7 @@ public class BaseActivity extends Activity {
 	public static final String NEWS_FEED_URL = "http://url to get the news feed";
 	protected static final String[] drawerItems = {"Profile","Selling","Buying","My Posts"};
 	protected static final String[] tabItems = {"Books","Rides","Tickets"};
-	
+
 	protected Context appContext;
 	protected DrawerLayout mDrawerLayout;
 	protected ListView mDrawerView;
@@ -49,9 +51,9 @@ public class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Parse.initialize(this, "24hUoVTzig5LnTD4mGqu1eH75sHYrNXVSSsIQEiU", "N6y4zorDVMCqqWqBU56wiZyXK4hUTtkaq6nzqsfP");
-		
+
 		appContext = this;
 		dataManager = new DataManager();
 		setContentView(R.layout.main_page_activity);
@@ -96,9 +98,22 @@ public class BaseActivity extends Activity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-		
-		
-		runUrlDownloadTask();
+
+		SharedPreferences generalPrefs = getSharedPreferences("general", 0);
+		if(generalPrefs.getBoolean("initial", true)){
+			Editor editor = generalPrefs.edit();
+			editor.putBoolean("initial", false);
+			editor.commit();
+			showLoginActivity();
+		}
+		else{
+			runUrlDownloadTask();
+		}
+	}
+
+	private void showLoginActivity() {
+		Intent i =new Intent(appContext, LoginPage.class);
+		startActivity(i);
 	}
 
 	protected void actionOnDrawerItemClick(int index) {
@@ -124,7 +139,8 @@ public class BaseActivity extends Activity {
 	}
 
 	private void loadProfilePage() {
-		Toast.makeText(appContext, "loading profile Page", Toast.LENGTH_LONG).show();
+		Intent i =new Intent(appContext, Profile.class);
+		startActivity(i);
 	}
 
 	private void loadMyPostsPage() {
@@ -132,18 +148,18 @@ public class BaseActivity extends Activity {
 	}
 
 	private void runUrlDownloadTask(){
-	    ParseQuery<ParseObject> query = ParseQuery.getQuery("FeedTable");
-	     query.findInBackground(new FindCallback<ParseObject>() {
-	      public void done(List<ParseObject> Objects, ParseException e) {
-	          if (e == null) {
-	        	  dataManager.saveData(Objects);
-	            }
-	          else{
-	            /* Write code for query failure */
-	          }
-	        }
-	      });
-	     
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("FeedTable");
+		query.findInBackground(new FindCallback<ParseObject>() {
+			public void done(List<ParseObject> Objects, ParseException e) {
+				if (e == null) {
+					dataManager.saveData(Objects);
+				}
+				else{
+					/* Write code for query failure */
+				}
+			}
+		});
+
 
 	}
 
