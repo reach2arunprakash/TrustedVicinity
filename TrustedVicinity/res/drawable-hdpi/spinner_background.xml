@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item >
+        <shape android:shape="rectangle">
+<!--            10dp border  -->
+            <gradient
+            android:startColor="@android:color/white"
+            android:endColor="#f0eeee"
+            android:type="linear" />
+
+        </shape>
+    </item>
+    
+    <item android:drawable="@drawable/dropdownarrow" android:left="280dp" android:bottom="13dp" android:top="13dp">
+        <shape android:shape="rectangle">>
+        </shape>
+    </item>
+</layer-list>
