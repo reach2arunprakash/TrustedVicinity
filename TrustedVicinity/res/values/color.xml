@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
- <color name="white">#ffffff</color>
- <color name="dark_blue">#10203B</color>
- <color name="transparent">#00000000</color>
- <color name="black">#000000</color>
- <color name="articlecolor">#3399FF</color> 
- <color name="article_title">#3399FF</color> 
- <color name="transblue">#661527B0</color>
- <color name="transwhite">#33f7f7f7</color>
- <color name="transwhite_half">#BBf7f7f7</color>
- <color name="prefback">#11f7f7f7</color>
- <color name="transblack">#88000000</color>
- <color name="transblackfull">#22000000</color>
- <color name="transred">#77731A2E</color>
- <color name="transwhitefull">#ccf7f7f7</color>
- <color name="textcolor">#1F3573</color>
- </resources>
+
+    <color name="white">#ffffff</color>
+    <color name="dark_blue">#10203B</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="articlecolor">#3399FF</color>
+    <color name="article_title">#3399FF</color>
+    <color name="transblue">#661527B0</color>
+    <color name="transwhite">#33f7f7f7</color>
+    <color name="transwhite_half">#BBf7f7f7</color>
+    <color name="prefback">#11f7f7f7</color>
+    <color name="transblack">#88000000</color>
+    <color name="transblackfull">#22000000</color>
+    <color name="transred">#77731A2E</color>
+    <color name="transwhitefull">#ccf7f7f7</color>
+    <color name="textcolor">#1F3573</color>
+    <color name="blueSelected">#004C7F</color>
+    <color name="blueUnSelected">#0099FF</color>
+    <color name="orangeSelected">#BC5604</color>
+    <color name="orangeUnSelected">#FF9000</color>
+    <color name="listview_back">#DDDADA</color>
+    
+</resources>

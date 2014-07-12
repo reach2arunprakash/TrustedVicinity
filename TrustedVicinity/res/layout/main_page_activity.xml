@@ -17,29 +17,95 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <Button
+            <LinearLayout
                 android:id="@+id/books_tab"
                 android:layout_width="0sp"
-                android:layout_height="wrap_content"
+                android:layout_height="50sp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Books"
-                android:onClick="booksClicked" />
+                android:background="@color/blueSelected"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="5sp"
+                android:onClick="booksClicked" >
 
-            <Button
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/book" >
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Books"
+                    android:textColor="@color/white" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/rides_tab"
                 android:layout_width="0sp"
-                android:text="Rides"
-                android:layout_height="wrap_content"
+                android:layout_height="50sp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:onClick="ridesClicked" />
+                android:background="@color/blueUnSelected"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="5sp"
+                android:onClick="ridesClicked"  >
 
-            <Button
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/travel" >
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Rides"
+                    android:textColor="@color/white" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/tickets_tab"
-                android:text="Tickets"
                 android:layout_width="0sp"
-                android:layout_height="wrap_content"
+                android:layout_height="50sp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:onClick="ticketsClicked" />
+                android:background="@color/blueUnSelected"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="5sp" 
+                android:onClick="ticketsClicked" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/ticket" >
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Tickets"
+                    android:textColor="@color/white" >
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
 
         <ListView
@@ -48,7 +114,8 @@
             android:layout_height="0sp"
             android:layout_weight="1"
             android:cacheColorHint="#00000000"
-            android:listSelector="@color/transblackfull" >
+            android:listSelector="@color/transblackfull"
+            android:background="@color/listview_back" >
         </ListView>
     </LinearLayout>
     <!-- The navigation drawer -->

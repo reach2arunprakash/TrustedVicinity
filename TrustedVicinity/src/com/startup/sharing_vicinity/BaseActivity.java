@@ -129,11 +129,43 @@ public class BaseActivity extends Activity {
 	}
 
 	private void loadSellingPage() {
+		if(MainPageActivity.activeCategoryTab==0){
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		}
+		else if(MainPageActivity.activeCategoryTab==1){
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		}
+		else{
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+		}
+		
 		refreshDisplayList();
 		Toast.makeText(appContext, "loading selling Page", Toast.LENGTH_LONG).show();
 	}
-
+	
 	private void loadBuyingPage() {
+		if(MainPageActivity.activeCategoryTab==0){
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		}
+		else if(MainPageActivity.activeCategoryTab==1){
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		}
+		else{
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+		}
+
 		refreshDisplayList();
 		Toast.makeText(appContext, "loading buying Page", Toast.LENGTH_LONG).show();
 	}

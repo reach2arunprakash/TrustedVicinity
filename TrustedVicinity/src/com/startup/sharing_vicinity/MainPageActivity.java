@@ -22,7 +22,7 @@ public class MainPageActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		newsItemInfoList = dataManager.getFullNewsFeedList();
+		//		newsItemInfoList = dataManager.getFullNewsFeedList();
 		newsItemInfoList = new ArrayList<NewsItemInfo>();
 		newsFeedListview = (ListView) findViewById(R.id.newsfeedlistview);
 
@@ -30,7 +30,7 @@ public class MainPageActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-					Toast.makeText(appContext, "Coming Soon", Toast.LENGTH_LONG).show();
+				Toast.makeText(appContext, "Coming Soon", Toast.LENGTH_LONG).show();
 			}
 		});
 
@@ -41,10 +41,9 @@ public class MainPageActivity extends BaseActivity {
 				return false;
 			}
 		});
-		
+
 		newsFeedListAdapter = new NewsFeedListAdapter(appContext,R.layout.news_feed_list_item);
 		newsFeedListview.setAdapter(newsFeedListAdapter);
-
 	}
 
 	@Override
@@ -55,21 +54,52 @@ public class MainPageActivity extends BaseActivity {
 		newsFeedListAdapter.notifyDataSetChanged();
 	}
 
-	public void booksClicked(View v){
-		activeCategoryTab = 0;
-		Toast.makeText(appContext, "books clicked", Toast.LENGTH_SHORT).show();
-		refreshDisplayList();
+	public void openChat(View v){
+		Toast.makeText(appContext, "chat clicked", Toast.LENGTH_SHORT).show();
 	}
 	
+	public void booksClicked(View v){
+		activeCategoryTab = 0;
+		if(activeDrawerItem==1){
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		}
+		else{
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		}
+		refreshDisplayList();
+	}
+
 	public void ridesClicked(View v){
 		activeCategoryTab = 1;
-		Toast.makeText(appContext, "rides clicked", Toast.LENGTH_SHORT).show();
+		if(activeDrawerItem==1){
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		}
+		else{
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		}
 		refreshDisplayList();
 	}
 
 	public void ticketsClicked(View v){
 		activeCategoryTab = 2;
-		Toast.makeText(appContext, "tickets clicked", Toast.LENGTH_SHORT).show();
+		if(activeDrawerItem==1){
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+		}
+		else{
+			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+		}
 		refreshDisplayList();
 	}
 
