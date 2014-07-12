@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class NewPost extends Activity implements LocationListener{
 	private LocationManager locationManager;
@@ -53,7 +54,7 @@ public class NewPost extends Activity implements LocationListener{
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
-		itemtype.setAdapter(adapter);
+		itemtype.setAdapter(adapter1);
 
 		locationManager = (LocationManager) getSystemService(this.LOCATION_SERVICE);
 	    // Define the criteria how to select the locatioin provider -> use
@@ -110,9 +111,11 @@ public class NewPost extends Activity implements LocationListener{
 				query.put("description", description.getText().toString());
 				try {
 					query.save();
+					finish();
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					Toast.makeText(getApplicationContext(), "unable to post,  please retry",Toast.LENGTH_SHORT).show();
 				}
 				
 				//send message !!
