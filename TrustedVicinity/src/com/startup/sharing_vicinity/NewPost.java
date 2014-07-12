@@ -125,6 +125,10 @@ public class NewPost extends Activity implements LocationListener{
 		});
 		
 	}
+	
+	public void cancelPost(View v){
+		finish();
+	}
 
 	@Override
 	public void onLocationChanged(Location arg0) {

@@ -20,7 +20,9 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_input_box"
         android:layout_gravity="center_horizontal"
-        android:ems="10" >
+        android:ems="10" 
+        android:hint="UserName"
+        android:gravity="center">
     </EditText>
 
     <EditText
@@ -30,7 +32,9 @@
         android:layout_marginBottom="60dp"
         android:background="@drawable/rounded_input_box"
         android:layout_gravity="center_horizontal"
-        android:ems="10" >
+        android:ems="10" 
+        android:hint="MobileNum."
+        android:gravity="center">
     </EditText>
 
     <Button
