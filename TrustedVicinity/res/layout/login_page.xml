@@ -21,7 +21,8 @@
         android:background="@drawable/rounded_input_box"
         android:layout_gravity="center_horizontal"
         android:ems="10" 
-        android:hint="UserName">
+        android:hint="UserName"
+        android:gravity="center">
     </EditText>
 
     <EditText
@@ -32,7 +33,8 @@
         android:background="@drawable/rounded_input_box"
         android:layout_gravity="center_horizontal"
         android:ems="10" 
-        android:hint="MobileNum.">
+        android:hint="MobileNum."
+        android:gravity="center">
     </EditText>
 
     <Button
