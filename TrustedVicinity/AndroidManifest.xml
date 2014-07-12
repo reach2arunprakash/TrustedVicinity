@@ -35,6 +35,16 @@
             android:name="com.startup.sharing_vicinity.NewPost"
             android:label="@string/app_name" >
         </activity>
-    </application>
+		
+		<activity
+            android:name="com.startup.sharing_vicinity.Profile"
+            android:label="NewPost" >
+        </activity>
+
+		<activity
+            android:name="com.startup.sharing_vicinity.LoginPage"
+            android:label="NewPost" >
+        </activity>
+	</application>
 
 </manifest>
