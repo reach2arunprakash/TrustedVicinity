@@ -1,13 +1,15 @@
 package com.startup.sharing_vicinity;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -22,7 +24,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.startup.sharing_vicinity.LinkDownloader.UrlDataDownloadListener;
+import com.parse.FindCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class BaseActivity extends Activity {
 
@@ -43,6 +49,9 @@ public class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Parse.initialize(this, "24hUoVTzig5LnTD4mGqu1eH75sHYrNXVSSsIQEiU", "N6y4zorDVMCqqWqBU56wiZyXK4hUTtkaq6nzqsfP");
+		
 		appContext = this;
 		dataManager = new DataManager();
 		setContentView(R.layout.main_page_activity);
@@ -88,6 +97,7 @@ public class BaseActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 		
+		
 		runUrlDownloadTask();
 	}
 
@@ -122,30 +132,19 @@ public class BaseActivity extends Activity {
 	}
 
 	private void runUrlDownloadTask(){
-		linkDownloader = new LinkDownloader(appContext);
-		linkDownloader.setDataDownloadListener(new UrlDataDownloadListener()
-		{
-			public void dataDownloadedSuccessfully(String data) {
-				dataManager.saveData(data);
-				refreshDisplayList();
-			}
-			public void dataDownloadFailed() {
-				showNoInternetAlert();
-			}
-		});
+	    ParseQuery<ParseObject> query = ParseQuery.getQuery("FeedTable");
+	     query.findInBackground(new FindCallback<ParseObject>() {
+	      public void done(List<ParseObject> Objects, ParseException e) {
+	          if (e == null) {
+	        	  dataManager.saveData(Objects);
+	            }
+	          else{
+	            /* Write code for query failure */
+	          }
+	        }
+	      });
+	     
 
-		try { 
-			boolean internetConnected = haveNetworkConnection();
-			if(internetConnected){
-				linkDownloader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NEWS_FEED_URL);
-			}
-			else{
-				showNoInternetAlert();
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	protected void refreshDisplayList() {
@@ -222,7 +221,8 @@ public class BaseActivity extends Activity {
 	}
 
 	private void showNewPostActivity() {
-		Toast.makeText(appContext, "show new post page", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(appContext,NewPost.class);
+		startActivity(intent);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.startup.sharing_vicinity;
 
+import java.util.Date;
+
 
 //public class NewsItemInfo implements Comparable<NewsItemInfo>{
 public class NewsItemInfo{
@@ -8,13 +10,17 @@ public class NewsItemInfo{
 	private String imageUrl;
 	private String tag;
 	private String type;
+	private Date dateCreated;
+	private String name;
 
-	public NewsItemInfo(String message, String imageUrl, String tag, String type ) {
+	public NewsItemInfo(String message, String imageUrl, String tag, String type, Date createdAt, String name ) {
 		super();
 		this.message = message;
 		this.imageUrl = imageUrl;
 		this.tag = tag;
 		this.type = type;
+		this.dateCreated  =createdAt;
+		this.name = name;
 	}
 
 	public String getMessage() {
@@ -47,6 +53,22 @@ public class NewsItemInfo{
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

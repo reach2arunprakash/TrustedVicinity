@@ -51,6 +51,8 @@ public class NewsFeedListAdapter extends BaseAdapter{
 	public class ViewHolder {
 		public TextView message;
 		public ImageView image;
+		public TextView timeSinceCreated;
+		public TextView name;
 	}
 
 	public String getDate(String s){
@@ -93,6 +95,13 @@ public class NewsFeedListAdapter extends BaseAdapter{
 		holder.message = (TextView) view.findViewById(R.id.message);
 		holder.message.setText(MainPageActivity.newsItemInfoList.get(position).getMessage());
 
+		holder.name = (TextView) view.findViewById(R.id.name);
+		holder.name.setText(MainPageActivity.newsItemInfoList.get(position).getName());
+
+		holder.timeSinceCreated = (TextView) view.findViewById(R.id.timeSinceCreated);
+		Date timeCreatedAt = MainPageActivity.newsItemInfoList.get(position).getDateCreated();
+		holder.timeSinceCreated.setText(getFormattedDate(timeCreatedAt));
+
 		holder.image = (ImageView) view.findViewById(R.id.image);
 
 		ThumbnailDownloader thumbnailDownloader = new ThumbnailDownloader(ctx,holder.image);
@@ -118,6 +127,10 @@ public class NewsFeedListAdapter extends BaseAdapter{
 			view.startAnimation(animation);
 		}
 		return view;
+	}
+
+	private String getFormattedDate(Date timeCreatedAt) {
+		return timeCreatedAt.toString();
 	}
 
 }

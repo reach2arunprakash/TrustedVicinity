@@ -2,4 +2,5 @@
 
     <string name="app_name">Sharing Vicinity</string>
 	<string name="hello_world">gr</string>
+	<string-array name="type_item"> <item>Books</item> <item>Rides</item> <item>Tickets</item> </string-array> <string-array name="buy_or_sell"> <item>Selling</item> <item>Looking For</item> </string-array>
 </resources>
