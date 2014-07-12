@@ -32,29 +32,30 @@ class LinkDownloader extends AsyncTask<String, Integer, String > {
 		try {
 			
 			String output = "";
-			DefaultHttpClient httpClient = new DefaultHttpClient();
 
-			HttpGet request = new HttpGet(urls[0]);
-			HttpResponse response = httpClient.execute(request);
-			HttpEntity httpEntity = response.getEntity();
-			InputStream is = httpEntity.getContent();           
-			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-			String line = null;
-			
-			while ((line = reader.readLine()) != null && !isCancelled()) {
-				output += line;
-			}
-			is.close();
-			reader.close();
-
-			is = null;
-			reader = null;
-			httpEntity = null;
-			response = null;
-			request = null;
-			httpClient = null;
-			if(isCancelled())
-				return null;
+//			DefaultHttpClient httpClient = new DefaultHttpClient();
+//
+//			HttpGet request = new HttpGet(urls[0]);
+//			HttpResponse response = httpClient.execute(request);
+//			HttpEntity httpEntity = response.getEntity();
+//			InputStream is = httpEntity.getContent();           
+//			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//			String line = null;
+//			
+//			while ((line = reader.readLine()) != null && !isCancelled()) {
+//				output += line;
+//			}
+//			is.close();
+//			reader.close();
+//
+//			is = null;
+//			reader = null;
+//			httpEntity = null;
+//			response = null;
+//			request = null;
+//			httpClient = null;
+//			if(isCancelled())
+//				return null;
 
 			return output;
 		} 

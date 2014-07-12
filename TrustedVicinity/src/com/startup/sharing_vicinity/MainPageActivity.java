@@ -1,5 +1,6 @@
 package com.startup.sharing_vicinity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -21,7 +22,8 @@ public class MainPageActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		newsItemInfoList = dataManager.getFullNewsFeedList();
+//		newsItemInfoList = dataManager.getFullNewsFeedList();
+		newsItemInfoList = new ArrayList<NewsItemInfo>();
 		newsFeedListview = (ListView) findViewById(R.id.newsfeedlistview);
 
 		newsFeedListview.setOnItemClickListener(new OnItemClickListener() {

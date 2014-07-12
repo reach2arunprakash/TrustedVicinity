@@ -27,7 +27,7 @@ import com.startup.sharing_vicinity.LinkDownloader.UrlDataDownloadListener;
 public class BaseActivity extends Activity {
 
 	public static final String NEWS_FEED_URL = "http://url to get the news feed";
-	protected static final String[] drawerItems = {"Profile","Selling","Buying"};
+	protected static final String[] drawerItems = {"Profile","Selling","Buying","My Posts"};
 	protected static final String[] tabItems = {"Books","Rides","Tickets"};
 	
 	protected Context appContext;
@@ -35,7 +35,7 @@ public class BaseActivity extends Activity {
 	protected ListView mDrawerView;
 	protected ActionBarDrawerToggle mDrawerToggle;
 	private LinkDownloader linkDownloader;
-	static int activeDrawerItem = 2;
+	static int activeDrawerItem = 1;
 	public static boolean showAnimation = true;
 	DataManager dataManager;
 
@@ -50,7 +50,7 @@ public class BaseActivity extends Activity {
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 		mDrawerView.setAdapter(new ArrayAdapter<String>(appContext, R.layout.drawer_item, drawerItems));
-		mDrawerView.setItemChecked(0, true);
+		mDrawerView.setItemChecked(activeDrawerItem, true);
 
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
@@ -97,8 +97,10 @@ public class BaseActivity extends Activity {
 			loadProfilePage();
 		else if(index==1)
 			loadSellingPage();
-		else
+		else if(index==2)
 			loadBuyingPage();
+		else
+			loadMyPostsPage();
 	}
 
 	private void loadSellingPage() {
@@ -113,6 +115,10 @@ public class BaseActivity extends Activity {
 
 	private void loadProfilePage() {
 		Toast.makeText(appContext, "loading profile Page", Toast.LENGTH_LONG).show();
+	}
+
+	private void loadMyPostsPage() {
+		Toast.makeText(appContext, "loading myposts Page", Toast.LENGTH_LONG).show();
 	}
 
 	private void runUrlDownloadTask(){
