@@ -39,7 +39,7 @@ public class MyPostsActivity extends BaseActivity {
 	}
 	
 	@Override
-	protected void refreshDisplayList() {
+	protected void refreshDisplayList(boolean isSearch) {
 		myPostsInfoList.clear();
 		myPostsInfoList.addAll(dataManager.getMyPosts());
 		myPostsListAdapter.notifyDataSetChanged();

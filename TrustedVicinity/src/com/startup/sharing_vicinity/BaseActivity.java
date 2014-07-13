@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -118,13 +119,15 @@ public class BaseActivity extends Activity {
 		else{
 			runUrlDownloadTask();
 		}
+		handleIntent(getIntent());
+
 	}
 
 	private void showLoginActivity() {
 		Intent i =new Intent(appContext, LoginPage.class);
 		startActivity(i);
 	}
-	
+
 	@Override public void onBackPressed() { 
 		if(!mDrawerLayout.isDrawerOpen(mDrawerView)){ 
 			mDrawerLayout.openDrawer(mDrawerView);
@@ -141,7 +144,7 @@ public class BaseActivity extends Activity {
 			loadBuyingPage();
 		else if(index==3)
 			loadMyPostsPage();
-		else{
+		else if(index==4){
 			loadChatsPage();
 		}
 	}
@@ -189,7 +192,7 @@ public class BaseActivity extends Activity {
 					dataManager.saveData(Objects);
 					if(loadingDialog!=null)
 						loadingDialog.dismiss();
-					refreshDisplayList();
+					refreshDisplayList(false);
 				}
 				else{
 					/* Write code for query failure */
@@ -213,7 +216,7 @@ public class BaseActivity extends Activity {
 		System.out.println("Yo!");
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("FeedTable").whereEqualTo("username", username);
 		query.orderByDescending("createdAt");
-		
+
 		System.out.println("About to run Query");
 		query.findInBackground(new FindCallback<ParseObject>() {
 			public void done(List<ParseObject> Objects, ParseException e) {
@@ -223,7 +226,7 @@ public class BaseActivity extends Activity {
 					System.out.println("saved!");
 					if(loadingDialog!=null)
 						loadingDialog.dismiss();
-					refreshDisplayList();
+					refreshDisplayList(false);
 				}
 				else{
 					System.out.println("Errored!");
@@ -236,7 +239,7 @@ public class BaseActivity extends Activity {
 
 	}
 
-	protected void refreshDisplayList() {
+	protected void refreshDisplayList(boolean isSearch) {
 		Log.d("tag", "rehrh");
 		//should be over-ridden by childs
 	}
@@ -292,6 +295,8 @@ public class BaseActivity extends Activity {
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerView);
 		menu.findItem(R.id.refresh).setVisible(!drawerOpen);
 		menu.findItem(R.id.newpost).setVisible(!drawerOpen);
+		menu.findItem(R.id.search).setVisible(!drawerOpen);
+
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -314,8 +319,38 @@ public class BaseActivity extends Activity {
 			showNewPostActivity();
 			return true;
 
+		case R.id.search:
+			onSearchRequested();
+			return true;
+
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		setIntent(intent);
+		handleIntent(intent);
+	}
+
+	public boolean onSearchRequested() {
+		startSearch(null, false, new Bundle(), false);
+		return true;
+	}
+
+
+	private void handleIntent(Intent intent) {
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			String query = intent.getStringExtra(SearchManager.QUERY);
+//			Toast.makeText(appContext, query, Toast.LENGTH_LONG).show();
+			DataManager.searchQuery = query;
+			refreshDisplayList(true);
+			//			dataManager.doMySearch(query);
+			//			listAdapter.notifyDataSetChanged();
+			//			if(videoInfoList.size()==0){
+			//				Toast.makeText(appContext, "No matching record found", Toast.LENGTH_SHORT).show();
+			//			}
 		}
 	}
 
