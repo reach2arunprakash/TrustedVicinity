@@ -35,7 +35,7 @@ import com.parse.ParseQuery;
 
 public class BaseActivity extends Activity {
 
-	protected static final String[] drawerItems = {"Profile","Selling","Buying","My Posts"};
+	protected static final String[] drawerItems = {"Profile","Selling","Buying","My Posts","Chats"};
 	protected static final String[] tabItems = {"Books","Rides","Tickets"};
 
 	protected Context appContext;
@@ -131,58 +131,23 @@ public class BaseActivity extends Activity {
 			loadSellingPage();
 		else if(index==2)
 			loadBuyingPage();
-		else
+		else if(index==3)
 			loadMyPostsPage();
+		else{
+			loadChatsPage();
+		}
 	}
 
 	private void loadSellingPage() {
 		finish();
 		Intent i =new Intent(appContext, MainPageActivity.class);
 		startActivity(i);
-
-		//		if(MainPageActivity.activeCategoryTab==0){
-		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
-		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-		//		}
-		//		else if(MainPageActivity.activeCategoryTab==1){
-		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
-		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-		//		}
-		//		else{
-		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
-		//		}
-
-		//		refreshDisplayList();
-		//		Toast.makeText(appContext, "loading selling Page", Toast.LENGTH_LONG).show();
 	}
 
 	private void loadBuyingPage() {
 		finish();
 		Intent i =new Intent(appContext, MainPageActivity.class);
 		startActivity(i);
-
-		//		if(MainPageActivity.activeCategoryTab==0){
-		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
-		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-		//		}
-		//		else if(MainPageActivity.activeCategoryTab==1){
-		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
-		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-		//		}
-		//		else{
-		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
-		//		}
-
-		//		refreshDisplayList();
-		//		Toast.makeText(appContext, "loading buying Page", Toast.LENGTH_LONG).show();
 	}
 
 	private void loadProfilePage() {
@@ -195,6 +160,12 @@ public class BaseActivity extends Activity {
 		finish();
 		Intent i =new Intent(appContext, MyPostsActivity.class);
 		startActivity(i);
+	}
+
+	private void loadChatsPage() {
+//		finish();
+//		Intent i =new Intent(appContext, AllChatsActivity.class);
+//		startActivity(i);
 	}
 
 	private void runUrlDownloadTask(){

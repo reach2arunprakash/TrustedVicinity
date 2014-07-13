@@ -54,7 +54,7 @@ public class ThumbnailDownloader extends AsyncTask<String, Integer, Bitmap>{
 	}
 
 	public String getThumbUrl(String imageUrl){
-		return "http://img.youtube.com/vi/"+imageUrl+"/default.jpg";
+		return imageUrl;
 	}
 
 }

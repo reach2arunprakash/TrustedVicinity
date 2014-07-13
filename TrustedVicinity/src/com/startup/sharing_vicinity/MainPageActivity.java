@@ -3,6 +3,8 @@ package com.startup.sharing_vicinity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,7 +32,10 @@ public class MainPageActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(appContext, "Coming Soon", Toast.LENGTH_LONG).show();
+				SharedPreferences generalPrefs = getSharedPreferences("general", 0);
+				Editor editor = generalPrefs.edit();
+				editor.putString("receiver", newsItemInfoList.get(position).getUserId());
+				editor.commit();
 			}
 		});
 

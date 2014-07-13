@@ -42,7 +42,8 @@ public class DataManager {
 			Date createdAt = data.get(i).getCreatedAt();
 			String type = data.get(i).getString("type");
 			String tag = data.get(i).getString("tags");
-			NewsItemInfo newsInfo = new NewsItemInfo(description, null,tag, type,createdAt,name);
+			String userId = data.get(i).getString("userId");
+			NewsItemInfo newsInfo = new NewsItemInfo(description, null,tag, type,createdAt,name,userId);
 			out.add(newsInfo);
 		}	
 		fullOriginalData = out;
@@ -58,7 +59,7 @@ public class DataManager {
 			Date createdAt = data.get(i).getCreatedAt();
 			String type = data.get(i).getString("type");
 			String tag = data.get(i).getString("tags");
-			NewsItemInfo newsInfo = new NewsItemInfo(description, null,tag, type,createdAt,name);
+			NewsItemInfo newsInfo = new NewsItemInfo(description, null,tag, type,createdAt,name, null);
 			out.add(newsInfo);
 		}	
 		fullMyPostsData = out;
