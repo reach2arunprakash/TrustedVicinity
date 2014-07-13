@@ -174,6 +174,7 @@ public class BaseActivity extends Activity {
 		loadingDialog.setCanceledOnTouchOutside(false);
 
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("FeedTable");
+		query.orderByDescending("createdAt");
 		query.findInBackground(new FindCallback<ParseObject>() {
 			public void done(List<ParseObject> Objects, ParseException e) {
 				if (e == null) {
@@ -203,6 +204,8 @@ public class BaseActivity extends Activity {
 		System.out.println("Querying for "+username);
 		System.out.println("Yo!");
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("FeedTable").whereEqualTo("username", username);
+		query.orderByDescending("createdAt");
+		
 		System.out.println("About to run Query");
 		query.findInBackground(new FindCallback<ParseObject>() {
 			public void done(List<ParseObject> Objects, ParseException e) {
