@@ -89,8 +89,13 @@ public class NewPost extends Activity implements LocationListener{
 			
 			@Override
 			public void onClick(View v) {
+				try{
 				lat = (double) (location.getLatitude());
 			    lng = (double) (location.getLongitude());
+				}catch(Exception e){
+					lat = 12.94164;
+					lng = 80.23366;
+				}
 			    Log.w(""+Double.toString(lat),"Myapp ");
 			    Log.w(""+Double.toString(lng),"Myapp ");
 
