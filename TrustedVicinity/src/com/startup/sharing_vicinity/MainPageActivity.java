@@ -44,6 +44,43 @@ public class MainPageActivity extends BaseActivity {
 
 		newsFeedListAdapter = new NewsFeedListAdapter(appContext,R.layout.news_feed_list_item);
 		newsFeedListview.setAdapter(newsFeedListAdapter);
+
+		if(activeDrawerItem==1){
+			if(MainPageActivity.activeCategoryTab==0){
+				findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+				findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+				findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			}
+			else if(MainPageActivity.activeCategoryTab==1){
+				findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+				findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+				findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+			}
+			else{
+				findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+				findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+				findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+			}
+		}
+		else if(activeDrawerItem==2){
+			if(MainPageActivity.activeCategoryTab==0){
+				findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+				findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+				findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			}
+			else if(MainPageActivity.activeCategoryTab==1){
+				findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+				findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+				findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+			}
+			else{
+				findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+				findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+				findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+			}
+
+		}
+
 	}
 
 	@Override
@@ -57,7 +94,7 @@ public class MainPageActivity extends BaseActivity {
 	public void openChat(View v){
 		Toast.makeText(appContext, "chat clicked", Toast.LENGTH_SHORT).show();
 	}
-	
+
 	public void booksClicked(View v){
 		activeCategoryTab = 0;
 		if(activeDrawerItem==1){

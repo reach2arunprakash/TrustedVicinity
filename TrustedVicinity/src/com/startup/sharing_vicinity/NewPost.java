@@ -1,12 +1,5 @@
 package com.startup.sharing_vicinity;
 
-import java.io.IOException;
-
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
-import com.parse.ParseObject;
-
 import android.app.Activity;
 import android.content.Context;
 import android.location.Criteria;
@@ -21,6 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
 
 public class NewPost extends Activity implements LocationListener{
 	private LocationManager locationManager;

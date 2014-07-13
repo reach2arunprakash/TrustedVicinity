@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +25,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -42,11 +43,11 @@ public class BaseActivity extends Activity {
 	protected DrawerLayout mDrawerLayout;
 	protected ListView mDrawerView;
 	protected ActionBarDrawerToggle mDrawerToggle;
-	private LinkDownloader linkDownloader;
 	static int activeDrawerItem = 1;
 	public static boolean showAnimation = true;
 	DataManager dataManager;
-
+	
+	ProgressDialog loadingDialog = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,12 @@ public class BaseActivity extends Activity {
 		appContext = this;
 		dataManager = new DataManager();
 		setContentView(R.layout.main_page_activity);
+		if(activeDrawerItem==1 || activeDrawerItem ==2){
+			findViewById(R.id.tabBar).setVisibility(View.VISIBLE);
+		}
+		else{
+			findViewById(R.id.tabBar).setVisibility(View.GONE);
+		}
 		mDrawerView = (ListView) findViewById(R.id.left_drawer);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -69,13 +76,13 @@ public class BaseActivity extends Activity {
 			/** Called when a drawer has settled in a completely closed state. */
 			public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
-				//				invalidateOptionsMenu();
+				invalidateOptionsMenu();
 			}
 
 			/** Called when a drawer has settled in a completely open state. */
 			public void onDrawerOpened(View drawerView) {
 				super.onDrawerOpened(drawerView);
-				//				invalidateOptionsMenu();
+				invalidateOptionsMenu();
 			}
 		};
 		mDrawerView.setOnItemClickListener(new OnItemClickListener() {
@@ -98,6 +105,7 @@ public class BaseActivity extends Activity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
+		setTitle(drawerItems[activeDrawerItem]);
 
 		SharedPreferences generalPrefs = getSharedPreferences("general", 0);
 		if(generalPrefs.getBoolean("initial", true)){
@@ -129,69 +137,89 @@ public class BaseActivity extends Activity {
 	}
 
 	private void loadSellingPage() {
-		if(MainPageActivity.activeCategoryTab==0){
-			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
-			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-		}
-		else if(MainPageActivity.activeCategoryTab==1){
-			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
-			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-		}
-		else{
-			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
-			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
-		}
-		
-		refreshDisplayList();
-		Toast.makeText(appContext, "loading selling Page", Toast.LENGTH_LONG).show();
-	}
-	
-	private void loadBuyingPage() {
-		if(MainPageActivity.activeCategoryTab==0){
-			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
-			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-		}
-		else if(MainPageActivity.activeCategoryTab==1){
-			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
-			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-		}
-		else{
-			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
-			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
-		}
+		finish();
+		Intent i =new Intent(appContext, MainPageActivity.class);
+		startActivity(i);
 
-		refreshDisplayList();
-		Toast.makeText(appContext, "loading buying Page", Toast.LENGTH_LONG).show();
+		//		if(MainPageActivity.activeCategoryTab==0){
+		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		//		}
+		//		else if(MainPageActivity.activeCategoryTab==1){
+		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		//		}
+		//		else{
+		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.blueUnSelected));
+		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.blueSelected));
+		//		}
+
+		//		refreshDisplayList();
+		//		Toast.makeText(appContext, "loading selling Page", Toast.LENGTH_LONG).show();
+	}
+
+	private void loadBuyingPage() {
+		finish();
+		Intent i =new Intent(appContext, MainPageActivity.class);
+		startActivity(i);
+
+		//		if(MainPageActivity.activeCategoryTab==0){
+		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		//		}
+		//		else if(MainPageActivity.activeCategoryTab==1){
+		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		//		}
+		//		else{
+		//			findViewById(R.id.books_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		//			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
+		//			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
+		//		}
+
+		//		refreshDisplayList();
+		//		Toast.makeText(appContext, "loading buying Page", Toast.LENGTH_LONG).show();
 	}
 
 	private void loadProfilePage() {
+		finish();
 		Intent i =new Intent(appContext, Profile.class);
 		startActivity(i);
 	}
 
 	private void loadMyPostsPage() {
-		Toast.makeText(appContext, "loading myposts Page", Toast.LENGTH_LONG).show();
+		finish();
+		Intent i =new Intent(appContext, MyPostsActivity.class);
+		startActivity(i);
 	}
 
 	private void runUrlDownloadTask(){
+		loadingDialog = ProgressDialog.show(appContext, null,null);
+		loadingDialog.setContentView(new ProgressBar(appContext));
+		loadingDialog.setCanceledOnTouchOutside(false);
+
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("FeedTable");
 		query.findInBackground(new FindCallback<ParseObject>() {
 			public void done(List<ParseObject> Objects, ParseException e) {
 				if (e == null) {
 					dataManager.saveData(Objects);
+					if(loadingDialog!=null)
+						loadingDialog.dismiss();
+					refreshDisplayList();
 				}
 				else{
 					/* Write code for query failure */
 				}
 			}
 		});
+	}
 
+	private void runMyPostsUrlDownloadTask(){
 
 	}
 
@@ -244,6 +272,16 @@ public class BaseActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// If the nav drawer is open, hide action items related to the content view
+		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerView);
+		menu.findItem(R.id.refresh).setVisible(!drawerOpen);
+		menu.findItem(R.id.newpost).setVisible(!drawerOpen);
+		return super.onPrepareOptionsMenu(menu);
+	}
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

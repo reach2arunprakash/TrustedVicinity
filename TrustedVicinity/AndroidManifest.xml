@@ -46,6 +46,9 @@
             android:label="Login/Register" 
             android:windowSoftInputMode="adjustPan">
         </activity>
-	</application>
+		<activity
+            android:name="com.startup.sharing_vicinity.MyPostsActivity">
+        </activity>
+			</application>
 
 </manifest>

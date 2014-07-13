@@ -5,9 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,28 +12,24 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class NewsFeedListAdapter extends BaseAdapter{
+public class MyPostsListAdapter extends BaseAdapter{
 
 	int row;
-	Bitmap notfoundBitmap;
 	Context ctx;
 
-	public NewsFeedListAdapter(Context c, int textViewResourceId) {
+	public MyPostsListAdapter(Context c, int textViewResourceId) {
 		super();
 		this.row = textViewResourceId;
 		this.ctx = c;
-		notfoundBitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.notfound);
 	}
 
 	@Override
 	public int getCount() {
-		return MainPageActivity.newsItemInfoList.size();
+		return MyPostsActivity.myPostsInfoList.size();
 	}
-
 
 	@Override
 	public long getItemId(int position) {
@@ -45,14 +38,13 @@ public class NewsFeedListAdapter extends BaseAdapter{
 
 	@Override
 	public Object getItem(int position) {
-		return MainPageActivity.newsItemInfoList.get(position);
+		return MyPostsActivity.myPostsInfoList.get(position);
 	}
 
 	public class ViewHolder {
 		public TextView message;
-		public ImageView image;
-		public TextView timeSinceCreated;
-		public TextView name;
+		public TextView type;
+		public TextView tag;
 	}
 
 	public String getDate(String s){
@@ -86,36 +78,16 @@ public class NewsFeedListAdapter extends BaseAdapter{
 		}
 		else {
 			holder = (ViewHolder) view.getTag();
-			ThumbnailDownloader thumbnailDownloader = (ThumbnailDownloader) holder.image.getTag(R.id.image);
-			if(thumbnailDownloader!=null){
-				thumbnailDownloader.cancel(true);
-			}
 		}
 
-		holder.message = (TextView) view.findViewById(R.id.message);
+		holder.message = (TextView) view.findViewById(R.id.myposts_description);
 		holder.message.setText(MainPageActivity.newsItemInfoList.get(position).getMessage());
 
-		holder.name = (TextView) view.findViewById(R.id.name);
-		holder.name.setText(MainPageActivity.newsItemInfoList.get(position).getName());
+		holder.type = (TextView) view.findViewById(R.id.mypost_type);
+		holder.type.setText(MainPageActivity.newsItemInfoList.get(position).getType());
 
-		holder.timeSinceCreated = (TextView) view.findViewById(R.id.timeSinceCreated);
-		Date timeCreatedAt = MainPageActivity.newsItemInfoList.get(position).getDateCreated();
-		holder.timeSinceCreated.setText(getFormattedDate(timeCreatedAt));
-
-		holder.image = (ImageView) view.findViewById(R.id.image);
-
-		ThumbnailDownloader thumbnailDownloader = new ThumbnailDownloader(ctx,holder.image);
-
-		try{
-			thumbnailDownloader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,MainPageActivity.newsItemInfoList.get(position).getImageUrl());
-		}
-		catch(Exception e){
-			if(thumbnailDownloader!=null)
-				thumbnailDownloader.cancel(true);
-		}
-
-		holder.image.setTag(R.id.image, thumbnailDownloader);
-		holder.image.setImageBitmap(notfoundBitmap);
+		holder.tag = (TextView) view.findViewById(R.id.mypost_tag);
+		holder.tag.setText(MainPageActivity.newsItemInfoList.get(position).getTag());
 
 		if(MainPageActivity.showAnimation){
 			Animation animation;
@@ -127,12 +99,6 @@ public class NewsFeedListAdapter extends BaseAdapter{
 			view.startAnimation(animation);
 		}
 		return view;
-	}
-
-	private String getFormattedDate(Date timeCreatedAt) {
-
-		
-		return timeCreatedAt.toString();
 	}
 
 }
