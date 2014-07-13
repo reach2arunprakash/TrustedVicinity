@@ -5,10 +5,10 @@
     android:versionName="1.0" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-		<uses-permission android:name="android.permission.INTERNET" />
-	
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         <activity
-            android:name="com.startup.sharing_vicinity.MainActivity"
+            android:name="com.startup.sharing_vicinity.MainPageActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,27 +28,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.startup.sharing_vicinity.MainPageActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
             android:name="com.startup.sharing_vicinity.NewPost"
             android:label="@string/app_name" >
         </activity>
-		
-		<activity
+        <activity
             android:name="com.startup.sharing_vicinity.Profile"
             android:label="NewPost" >
         </activity>
-
-		<activity
+        <activity
             android:name="com.startup.sharing_vicinity.LoginPage"
-            android:label="Login/Register" 
-            android:windowSoftInputMode="adjustPan">
+            android:label="Login/Register"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
-		<activity
-            android:name="com.startup.sharing_vicinity.MyPostsActivity">
+        <activity android:name="com.startup.sharing_vicinity.MyPostsActivity" >
         </activity>
-			</application>
+    </application>
 
 </manifest>

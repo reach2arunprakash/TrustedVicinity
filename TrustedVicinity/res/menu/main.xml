@@ -10,7 +10,7 @@
         android:title="Refresh"/>
     <item
         android:id="@+id/newpost"
-        android:icon="@android:drawable/btn_plus"
+        android:icon="@drawable/ic_action_new"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="New Post"/>

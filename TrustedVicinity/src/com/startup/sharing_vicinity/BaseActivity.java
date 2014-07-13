@@ -35,7 +35,6 @@ import com.parse.ParseQuery;
 
 public class BaseActivity extends Activity {
 
-	public static final String NEWS_FEED_URL = "http://url to get the news feed";
 	protected static final String[] drawerItems = {"Profile","Selling","Buying","My Posts"};
 	protected static final String[] tabItems = {"Books","Rides","Tickets"};
 

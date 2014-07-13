@@ -130,9 +130,26 @@ public class NewsFeedListAdapter extends BaseAdapter{
 	}
 
 	private String getFormattedDate(Date timeCreatedAt) {
-
-		
-		return timeCreatedAt.toString();
+		long diff = new Date().getTime()-timeCreatedAt.getTime();
+		long diffDays = diff/(1000*60*60*24);
+		long diffHours = diff/(60*60*1000)%24;
+		long diffSeconds = diff / 1000 % 60;
+		long diffMinutes = diff / (60 * 1000) % 60;
+		if(diffDays==0){
+			return ("Posted "+diffHours +" hours ago");
+		}
+		else if(diffDays==0 && diffHours==0){
+			return("Posted "+diffMinutes + " minutes ago");
+		}
+		else if(diffDays==0 && diffHours==0 && diffMinutes==0){
+			return("Posted "+diffSeconds +" seconds ago");
+		}
+		else if(diffDays==0 && diffHours==0 && diffMinutes==0 && diffSeconds==0){
+			return("Posted 1 second ago");
+		}
+		else{
+			return("Posted "+diffDays +" days ago");
+		}
 	}
 
 }

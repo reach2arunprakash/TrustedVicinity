@@ -123,12 +123,11 @@
 
     <ListView
         android:id="@+id/left_drawer"
-        android:layout_width="300dp"
+        android:layout_width="260dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white"
         android:cacheColorHint="#00000000"
-        android:choiceMode="singleChoice"
         android:divider="@color/transblack"
         android:dividerHeight="0dp"
         android:listSelector="@color/transblackfull" />
