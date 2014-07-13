@@ -38,6 +38,8 @@ public class BaseActivity extends Activity {
 
 	protected static final String[] drawerItems = {"Profile","Selling","Buying","My Posts","Chats","Exit"};
 	protected static final String[] tabItems = {"Books","Rides","Tickets"};
+	public static final CharSequence UserName = "Anurag";
+	public static final CharSequence PhoneNo = "9624912480124";
 
 	protected Context appContext;
 	protected DrawerLayout mDrawerLayout;
@@ -162,7 +164,7 @@ public class BaseActivity extends Activity {
 	}
 
 	private void loadProfilePage() {
-		finish();
+//		finish();
 		Intent i =new Intent(appContext, Profile.class);
 		startActivity(i);
 	}
@@ -288,6 +290,12 @@ public class BaseActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+	protected void onResume(){
+		super.onResume();
+		
+	}
+
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {

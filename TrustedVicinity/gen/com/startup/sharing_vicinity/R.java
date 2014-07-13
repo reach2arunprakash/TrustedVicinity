@@ -1091,6 +1091,7 @@ containing a value of this type.
         public static final int newsfeedlistview=0x7f060049;
         public static final int none=0x7f060010;
         public static final int normal=0x7f060000;
+        public static final int phone=0x7f060059;
         public static final int profile_pic=0x7f060057;
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
@@ -1117,8 +1118,6 @@ containing a value of this type.
         public static final int submit_area=0x7f060039;
         public static final int tabBar=0x7f060045;
         public static final int tabMode=0x7f060002;
-        public static final int textView1=0x7f060058;
-        public static final int textView2=0x7f060059;
         public static final int textView3=0x7f06005a;
         public static final int textView4=0x7f06005c;
         public static final int textView5=0x7f06005d;
@@ -1128,6 +1127,7 @@ containing a value of this type.
         public static final int top_action_bar=0x7f060020;
         public static final int up=0x7f060021;
         public static final int useLogo=0x7f060003;
+        public static final int user_name=0x7f060058;
         public static final int withText=0x7f06000c;
     }
     public static final class integer {
