@@ -8,10 +8,11 @@ import com.parse.ParseObject;
 
 public class DataManager {
 
-	List <NewsItemInfo> fullOriginalData = null;
-	List <NewsItemInfo> fullMyPostsData = null;
+	static List <NewsItemInfo> fullOriginalData = null;
+	static List <NewsItemInfo> fullMyPostsData = null;
+	static String searchQuery = "";
 
-	protected List<NewsItemInfo> getDataBasedOnOptions(int activeDrawerItem,int activeCategoryTab) {
+	protected List<NewsItemInfo> getDataBasedOnOptions(int activeDrawerItem,int activeCategoryTab, boolean isSearch) {
 		List <NewsItemInfo> out = new ArrayList<NewsItemInfo>();
 		if(fullOriginalData==null){
 			return out;
@@ -28,7 +29,10 @@ public class DataManager {
 					i--;
 				}
 			}
-			return out;
+			if(isSearch)
+				return getDataBasedOnSearch(out);
+			else
+				return out;
 		}
 	}
 
@@ -74,6 +78,17 @@ public class DataManager {
 			out.addAll(fullMyPostsData);
 			return out;
 		}
+	}
+
+	public List<NewsItemInfo> getDataBasedOnSearch(List<NewsItemInfo> out) {
+		for(int i=0;i<out.size();i++){
+			if(!out.get(i).getMessage().contains(searchQuery)){
+				out.remove(i);
+				i--;	
+			}
+		}
+		return out;
+
 	}
 
 

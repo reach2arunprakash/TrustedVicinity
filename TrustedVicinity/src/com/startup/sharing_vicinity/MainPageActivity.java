@@ -89,10 +89,37 @@ public class MainPageActivity extends BaseActivity {
 	}
 
 	@Override
-	protected void refreshDisplayList() {
+	protected void refreshDisplayList(boolean isSearch) {
 		Toast.makeText(appContext, "refreshing", Toast.LENGTH_SHORT).show();
 		newsItemInfoList.clear();
-		newsItemInfoList.addAll(dataManager.getDataBasedOnOptions(activeDrawerItem,activeCategoryTab));
+		newsItemInfoList.addAll(dataManager.getDataBasedOnOptions(activeDrawerItem,activeCategoryTab,isSearch));
+		if(newsFeedListAdapter==null || newsFeedListview==null){
+			if(newsFeedListAdapter==null)
+				newsFeedListAdapter = new NewsFeedListAdapter(appContext,R.layout.news_feed_list_item);
+			if(newsFeedListview==null){
+				newsFeedListview = (ListView) findViewById(R.id.newsfeedlistview);
+
+				newsFeedListview.setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						SharedPreferences generalPrefs = getSharedPreferences("general", 0);
+						Editor editor = generalPrefs.edit();
+						editor.putString("receiver", newsItemInfoList.get(position).getUserId());
+						editor.commit();
+					}
+				});
+
+				newsFeedListview.setOnTouchListener(new OnTouchListener() {
+					@Override
+					public boolean onTouch(View v, MotionEvent event) {
+						showAnimation = false;
+						return false;
+					}
+				});
+			}
+			newsFeedListview.setAdapter(newsFeedListAdapter);
+		}
 		newsFeedListAdapter.notifyDataSetChanged();
 	}
 
@@ -112,7 +139,7 @@ public class MainPageActivity extends BaseActivity {
 			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
 			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
 		}
-		refreshDisplayList();
+		refreshDisplayList(false);
 	}
 
 	public void ridesClicked(View v){
@@ -127,7 +154,7 @@ public class MainPageActivity extends BaseActivity {
 			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
 			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
 		}
-		refreshDisplayList();
+		refreshDisplayList(false);
 	}
 
 	public void ticketsClicked(View v){
@@ -142,7 +169,7 @@ public class MainPageActivity extends BaseActivity {
 			findViewById(R.id.rides_tab).setBackgroundColor(getResources().getColor(R.color.orangeUnSelected));
 			findViewById(R.id.tickets_tab).setBackgroundColor(getResources().getColor(R.color.orangeSelected));
 		}
-		refreshDisplayList();
+		refreshDisplayList(false);
 	}
 
 }
