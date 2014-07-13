@@ -47,7 +47,8 @@ public class DataManager {
 			String type = data.get(i).getString("type");
 			String tag = data.get(i).getString("tags");
 			String userId = data.get(i).getString("userId");
-			NewsItemInfo newsInfo = new NewsItemInfo(description, null,tag, type,createdAt,name,userId);
+			String imgURL = data.get(i).getString("URL");
+			NewsItemInfo newsInfo = new NewsItemInfo(description, imgURL,tag, type,createdAt,name,userId);
 			out.add(newsInfo);
 		}	
 		fullOriginalData = out;
