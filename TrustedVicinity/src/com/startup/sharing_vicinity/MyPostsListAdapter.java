@@ -81,13 +81,13 @@ public class MyPostsListAdapter extends BaseAdapter{
 		}
 
 		holder.message = (TextView) view.findViewById(R.id.myposts_description);
-		holder.message.setText(MainPageActivity.newsItemInfoList.get(position).getMessage());
+		holder.message.setText(MyPostsActivity.myPostsInfoList.get(position).getMessage());
 
 		holder.type = (TextView) view.findViewById(R.id.mypost_type);
-		holder.type.setText(MainPageActivity.newsItemInfoList.get(position).getType());
+		holder.type.setText(MyPostsActivity.myPostsInfoList.get(position).getType());
 
 		holder.tag = (TextView) view.findViewById(R.id.mypost_tag);
-		holder.tag.setText(MainPageActivity.newsItemInfoList.get(position).getTag());
+		holder.tag.setText(MyPostsActivity.myPostsInfoList.get(position).getTag());
 
 		if(MainPageActivity.showAnimation){
 			Animation animation;

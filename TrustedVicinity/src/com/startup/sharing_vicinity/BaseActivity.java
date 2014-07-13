@@ -45,7 +45,7 @@ public class BaseActivity extends Activity {
 	static int activeDrawerItem = 1;
 	public static boolean showAnimation = true;
 	DataManager dataManager;
-	
+
 	ProgressDialog loadingDialog = null;
 
 	@Override
@@ -163,9 +163,9 @@ public class BaseActivity extends Activity {
 	}
 
 	private void loadChatsPage() {
-//		finish();
-//		Intent i =new Intent(appContext, AllChatsActivity.class);
-//		startActivity(i);
+		//		finish();
+		//		Intent i =new Intent(appContext, AllChatsActivity.class);
+		//		startActivity(i);
 	}
 
 	private void runUrlDownloadTask(){
@@ -190,18 +190,20 @@ public class BaseActivity extends Activity {
 	}
 
 	public void runMyPostsUrlDownloadTask(){
-		
+
+		if(loadingDialog!=null)
+			loadingDialog.dismiss();
 		loadingDialog = ProgressDialog.show(appContext, null,null);
 		loadingDialog.setContentView(new ProgressBar(appContext));
 		loadingDialog.setCanceledOnTouchOutside(false);
 
 		SharedPreferences generalPrefs = getSharedPreferences("general", 0);
 		String username = generalPrefs.getString("username", null);
-			
+
 		System.out.println("Querying for "+username);
-	System.out.println("Yo!");
-	ParseQuery<ParseObject> query = ParseQuery.getQuery("User");//.whereEqualTo("username", username);
-	System.out.println("About to run Query");
+		System.out.println("Yo!");
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("FeedTable").whereEqualTo("username", username);
+		System.out.println("About to run Query");
 		query.findInBackground(new FindCallback<ParseObject>() {
 			public void done(List<ParseObject> Objects, ParseException e) {
 				if (e == null) {
@@ -217,10 +219,10 @@ public class BaseActivity extends Activity {
 				}
 			}
 		});
-		
+
 
 		System.out.println("got 1st");
-		
+
 	}
 
 	protected void refreshDisplayList() {
@@ -272,7 +274,7 @@ public class BaseActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// If the nav drawer is open, hide action items related to the content view

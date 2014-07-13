@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MyPostsActivity extends BaseActivity {
 
@@ -36,5 +37,13 @@ public class MyPostsActivity extends BaseActivity {
 		myPostsListAdapter = new MyPostsListAdapter(appContext,R.layout.myposts_list_item);
 		myPostsListview.setAdapter(myPostsListAdapter);
 	}
+	
+	@Override
+	protected void refreshDisplayList() {
+		myPostsInfoList.clear();
+		myPostsInfoList.addAll(dataManager.getMyPosts());
+		myPostsListAdapter.notifyDataSetChanged();
+	}
+
 
 }
