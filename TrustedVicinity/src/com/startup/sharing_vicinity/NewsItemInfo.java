@@ -12,8 +12,9 @@ public class NewsItemInfo{
 	private String type;
 	private Date dateCreated;
 	private String name;
+	private String userId;
 
-	public NewsItemInfo(String message, String imageUrl, String tag, String type, Date createdAt, String name ) {
+	public NewsItemInfo(String message, String imageUrl, String tag, String type, Date createdAt, String name, String userId ) {
 		super();
 		this.message = message;
 		this.imageUrl = imageUrl;
@@ -21,6 +22,7 @@ public class NewsItemInfo{
 		this.type = type;
 		this.dateCreated  =createdAt;
 		this.name = name;
+		this.userId = userId;
 	}
 
 	public String getMessage() {
@@ -70,6 +72,16 @@ public class NewsItemInfo{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
+	
 	
 	
 
