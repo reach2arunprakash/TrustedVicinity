@@ -3,10 +3,8 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:checkMark="?android:attr/listChoiceIndicatorSingle"
     android:gravity="center_vertical"
     android:textColor="@color/dark_blue"
     android:paddingLeft="15sp"
     android:paddingRight="10sp"
-    android:textStyle="bold|italic"
     android:textAppearance="?android:attr/textAppearanceListItem" />

@@ -35,7 +35,7 @@ import com.parse.ParseQuery;
 
 public class BaseActivity extends Activity {
 
-	protected static final String[] drawerItems = {"Profile","Selling","Buying","My Posts","Chats"};
+	protected static final String[] drawerItems = {"Profile","Selling","Buying","My Posts","Chats","Exit"};
 	protected static final String[] tabItems = {"Books","Rides","Tickets"};
 
 	protected Context appContext;
@@ -91,6 +91,8 @@ public class BaseActivity extends Activity {
 					long arg3) {
 				mDrawerLayout.closeDrawer(mDrawerView);
 				if(activeDrawerItem!=arg2){
+					if(arg2==5)
+						finish();
 					showAnimation = true;
 					setTitle(drawerItems[arg2]);
 					actionOnDrawerItemClick(arg2);
@@ -121,6 +123,12 @@ public class BaseActivity extends Activity {
 	private void showLoginActivity() {
 		Intent i =new Intent(appContext, LoginPage.class);
 		startActivity(i);
+	}
+	
+	@Override public void onBackPressed() { 
+		if(!mDrawerLayout.isDrawerOpen(mDrawerView)){ 
+			mDrawerLayout.openDrawer(mDrawerView);
+		}
 	}
 
 	protected void actionOnDrawerItemClick(int index) {
