@@ -2,6 +2,7 @@ package com.startup.sharing_vicinity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -107,6 +108,11 @@ public class NewPost extends Activity implements LocationListener{
 				query.put("tags",itemtype.getSelectedItem().toString());
 				query.put("location",location);
 				query.put("description", description.getText().toString());
+				
+				SharedPreferences generalPrefs = getSharedPreferences("general", 0);
+				String username = generalPrefs.getString("username", null);
+				
+				query.put("name", username);
 				try {
 					query.save();
 					finish();

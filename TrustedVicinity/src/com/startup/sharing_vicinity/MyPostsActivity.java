@@ -20,6 +20,8 @@ public class MyPostsActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 //		setContentView(myPostsListview);
 		//		newsItemInfoList = dataManager.getFullNewsFeedList();
+		System.out.println("before posts");
+		runMyPostsUrlDownloadTask();
 		myPostsInfoList = new ArrayList<NewsItemInfo>();
 		myPostsListview = (ListView) findViewById(R.id.newsfeedlistview);
 

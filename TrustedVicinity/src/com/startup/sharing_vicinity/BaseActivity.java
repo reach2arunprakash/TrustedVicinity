@@ -218,8 +218,38 @@ public class BaseActivity extends Activity {
 		});
 	}
 
-	private void runMyPostsUrlDownloadTask(){
+	public void runMyPostsUrlDownloadTask(){
+		
+		loadingDialog = ProgressDialog.show(appContext, null,null);
+		loadingDialog.setContentView(new ProgressBar(appContext));
+		loadingDialog.setCanceledOnTouchOutside(false);
 
+		SharedPreferences generalPrefs = getSharedPreferences("general", 0);
+		String username = generalPrefs.getString("username", null);
+			
+		System.out.println("Querying for "+username);
+	System.out.println("Yo!");
+	ParseQuery<ParseObject> query = ParseQuery.getQuery("User");//.whereEqualTo("username", username);
+	System.out.println("About to run Query");
+		query.findInBackground(new FindCallback<ParseObject>() {
+			public void done(List<ParseObject> Objects, ParseException e) {
+				if (e == null) {
+					System.out.println("Size"+Objects.size());
+					dataManager.saveMyPostsData(Objects);
+					System.out.println("saved!");
+					if(loadingDialog!=null)
+						loadingDialog.dismiss();
+					refreshDisplayList();
+				}
+				else{
+					System.out.println("Errored!");
+				}
+			}
+		});
+		
+
+		System.out.println("got 1st");
+		
 	}
 
 	protected void refreshDisplayList() {
